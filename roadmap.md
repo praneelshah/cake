@@ -1,0 +1,10 @@
+- [x] Complete the public bakery information pages and navigation
+- [x] Add menu browsing, bakery story, and contact/inquiry experiences
+- [x] Verify routes, responsive layout, and metadata
+- [x] Redesign non-hero pages with artisanal boutique direction, richer imagery, and motion
+- [x] Cinematic animated heroes with new photography on Menu, About and Contact (home hero untouched)
+- [x] Rebrand the whole site to Amourea Cake (Saki Vihar Rd, Chandivali, Mumbai)
+- [x] Expand the home page with new image/text sections and a scroll-linked motion system (hero untouched)
+- [ ] Fill in the real phone, email, Instagram and order link in src/lib/shop.ts
+- [ ] Replace the placeholder menu names, descriptions and prices with the real counter
+- [ ] Swap the stock photography for photos of the actual shop and cakes

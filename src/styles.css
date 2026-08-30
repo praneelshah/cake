@@ -1,0 +1,1321 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --color-cocoa: var(--cocoa);
+  --color-cream: var(--cream);
+  --color-blush: var(--blush);
+  --color-clay: var(--clay);
+  --color-hero-bg: var(--hero-bg);
+  --color-hero-ink: var(--hero-ink);
+  --color-hero-topbar: var(--hero-topbar);
+  --color-hero-topbar-foreground: var(--hero-topbar-foreground);
+  --color-hero-gold: var(--hero-gold);
+  --color-hero-gold-ink: var(--hero-gold-ink);
+  --color-hero-tint: var(--hero-tint);
+  --font-editorial: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Karla", system-ui, sans-serif;
+  --color-atelier-paper: var(--atelier-paper);
+  --color-atelier-ink: var(--atelier-ink);
+  --color-atelier-gold: var(--atelier-gold);
+  --color-atelier-rose: var(--atelier-rose);
+  --color-atelier-sage: var(--atelier-sage);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 1.5rem;
+  /* Warm bakery palette */
+  --cocoa: oklch(0.34 0.045 42);
+  --cream: oklch(0.965 0.014 82);
+  --blush: oklch(0.9 0.028 30);
+  --clay: oklch(0.81 0.038 52);
+  /* Hero (Baker-style) tokens */
+  --hero-bg: oklch(0.972 0 0);
+  --hero-ink: oklch(0.27 0 0);
+  --hero-topbar: oklch(0.18 0 0);
+  --hero-topbar-foreground: oklch(0.93 0 0);
+  /* Two golds, because one cannot carry small text on both grounds:
+     --hero-gold reads on the dark bands, --hero-gold-ink on the paper. */
+  --hero-gold: oklch(0.75 0.11 78);
+  --hero-gold-ink: oklch(0.55 0.105 74);
+  /* Warm off-white for quiet bands that need to separate from the page
+     without a dark fill. */
+  --hero-tint: oklch(0.955 0.012 82);
+  /* Interior pages: a complementary patisserie palette */
+  --atelier-paper: oklch(0.975 0.012 83);
+  --atelier-ink: oklch(0.27 0.025 42);
+  --atelier-gold: oklch(0.63 0.095 73);
+  --atelier-rose: oklch(0.89 0.045 25);
+  --atelier-sage: oklch(0.84 0.045 126);
+
+  --background: oklch(0.7 0.038 42);
+  --foreground: oklch(0.28 0.038 40);
+  --card: oklch(0.965 0.014 82);
+  --card-foreground: oklch(0.28 0.038 40);
+  --popover: oklch(0.965 0.014 82);
+  --popover-foreground: oklch(0.28 0.038 40);
+  --primary: oklch(0.36 0.048 42);
+  --primary-foreground: oklch(0.97 0.014 82);
+  --secondary: oklch(0.81 0.038 52);
+  --secondary-foreground: oklch(0.3 0.04 40);
+  --muted: oklch(0.93 0.016 74);
+  --muted-foreground: oklch(0.53 0.028 46);
+  --accent: oklch(0.9 0.028 30);
+  --accent-foreground: oklch(0.3 0.04 40);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(0.88 0.018 60);
+  --input: oklch(0.88 0.018 60);
+  --ring: oklch(0.6 0.05 45);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.965 0.014 82);
+  --sidebar-foreground: oklch(0.28 0.038 40);
+  --sidebar-primary: oklch(0.36 0.048 42);
+  --sidebar-primary-foreground: oklch(0.97 0.014 82);
+  --sidebar-accent: oklch(0.9 0.028 30);
+  --sidebar-accent-foreground: oklch(0.3 0.04 40);
+  --sidebar-border: oklch(0.88 0.018 60);
+  --sidebar-ring: oklch(0.6 0.05 45);
+}
+
+.dark {
+  --background: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.984 0.003 247.858);
+  --card: oklch(0.208 0.042 265.755);
+  --card-foreground: oklch(0.984 0.003 247.858);
+  --popover: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.929 0.013 255.508);
+  --primary-foreground: oklch(0.208 0.042 265.755);
+  --secondary: oklch(0.279 0.041 260.031);
+  --secondary-foreground: oklch(0.984 0.003 247.858);
+  --muted: oklch(0.279 0.041 260.031);
+  --muted-foreground: oklch(0.704 0.04 256.788);
+  --accent: oklch(0.279 0.041 260.031);
+  --accent-foreground: oklch(0.984 0.003 247.858);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.208 0.042 265.755);
+  --sidebar-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.279 0.041 260.031);
+  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* ---- Hero slider animations ---- */
+@keyframes hero-title-in {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes hero-text-in {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes hero-img-in {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--from-x, 0), var(--from-y, 60px), 0) scale(0.85)
+      rotate(var(--from-rot, 0deg));
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+}
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(var(--float-rot, 3deg));
+  }
+}
+.hero-anim-title {
+  animation: hero-title-in 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-anim-text {
+  animation: hero-text-in 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-anim-img {
+  animation: hero-img-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-float {
+  animation: hero-float 7s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-anim-title,
+  .hero-anim-text,
+  .hero-anim-img,
+  .hero-float {
+    animation: none;
+  }
+}
+
+/* ---- Scroll reveal ---- */
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-up {
+  transform: translateY(42px);
+}
+.reveal-rise {
+  transform: translateY(90px) scale(0.97);
+}
+.reveal-zoom {
+  transform: scale(1.06);
+}
+.reveal-left {
+  transform: translateX(-60px);
+}
+.reveal-right {
+  transform: translateX(60px);
+}
+.reveal-blur {
+  transform: translateY(28px);
+  filter: blur(14px);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Baker-style underline link */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+/* ---- Artisanal boutique interiors ---- */
+.atelier-page {
+  font-family: var(--font-body);
+}
+.atelier-page h1,
+.atelier-page h2,
+.atelier-page h3 {
+  font-family: var(--font-editorial);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.font-editorial {
+  font-family: var(--font-editorial);
+}
+.font-body {
+  font-family: var(--font-body);
+}
+.atelier-kicker {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  line-height: 1.2;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+.atelier-header {
+  background: var(--atelier-paper);
+}
+.atelier-menu-intro {
+  border-top: 1px solid color-mix(in oklab, var(--atelier-ink) 10%, transparent);
+}
+.atelier-stage {
+  position: relative;
+  min-height: 22rem;
+  perspective: 900px;
+}
+.atelier-stage-ring {
+  position: absolute;
+  right: 8%;
+  top: 12%;
+  width: 18rem;
+  height: 18rem;
+  border: 1px solid color-mix(in oklab, var(--atelier-gold) 50%, transparent);
+  border-radius: 50%;
+  transform: rotateX(68deg) rotateZ(-15deg);
+}
+.atelier-stage-ring::after {
+  position: absolute;
+  inset: 1.5rem;
+  border: 1px solid color-mix(in oklab, var(--atelier-gold) 25%, transparent);
+  border-radius: 50%;
+  content: "";
+}
+.atelier-stage-pastry {
+  position: absolute;
+  right: 8%;
+  top: 0;
+  width: 18rem;
+  height: 22rem;
+  object-fit: cover;
+  transform: rotateY(-14deg) rotateZ(7deg) translateZ(2rem);
+  box-shadow: 1.5rem 1.5rem 0 color-mix(in oklab, var(--atelier-rose) 65%, transparent);
+}
+.atelier-stage-label {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 8%;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+.atelier-stage-label em {
+  font-family: var(--font-editorial);
+  font-size: 1.4rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.atelier-depth {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition:
+    transform 700ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 700ms ease;
+}
+.atelier-depth:hover {
+  transform: translateY(-0.45rem) rotateX(1.5deg) rotateY(-1.5deg);
+}
+.atelier-product-frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--atelier-rose);
+  box-shadow: 0.8rem 0.8rem 0 color-mix(in oklab, var(--atelier-rose) 75%, var(--atelier-paper));
+}
+.atelier-product-frame::after {
+  position: absolute;
+  inset: 1rem;
+  border: 1px solid color-mix(in oklab, var(--atelier-paper) 65%, transparent);
+  content: "";
+  pointer-events: none;
+}
+.atelier-product-index {
+  position: absolute;
+  bottom: 1.35rem;
+  left: 1.35rem;
+  z-index: 1;
+  color: var(--atelier-paper);
+  font-family: var(--font-editorial);
+  font-size: 1.5rem;
+  font-style: italic;
+}
+.atelier-photo-frame {
+  position: relative;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  background: var(--atelier-rose);
+  box-shadow: 1rem 1rem 0 var(--atelier-gold);
+}
+.atelier-photo-frame::after {
+  position: absolute;
+  inset: 1rem;
+  border: 1px solid color-mix(in oklab, var(--atelier-paper) 70%, transparent);
+  content: "";
+  pointer-events: none;
+}
+.atelier-photo-frame-small {
+  margin-right: 1.2rem;
+  margin-bottom: 1.2rem;
+  box-shadow: 1.2rem 1.2rem 0 var(--atelier-sage);
+}
+.atelier-photo-note {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 1;
+  color: var(--atelier-paper);
+  font-family: var(--font-editorial);
+  font-size: 1.35rem;
+  font-style: italic;
+  line-height: 0.9;
+  text-align: right;
+}
+.atelier-contact-object {
+  position: relative;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  background: var(--atelier-sage);
+  box-shadow: 1rem 1rem 0 var(--atelier-rose);
+}
+.atelier-contact-object::before {
+  position: absolute;
+  top: -1.25rem;
+  left: -1.25rem;
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid var(--atelier-gold);
+  content: "";
+}
+.atelier-form {
+  background: var(--atelier-paper);
+  padding: clamp(1.5rem, 5vw, 4rem);
+  box-shadow: 1rem 1rem 0 color-mix(in oklab, var(--atelier-rose) 70%, transparent);
+}
+.atelier-field {
+  display: grid;
+  gap: 0.55rem;
+  color: color-mix(in oklab, var(--atelier-ink) 65%, transparent);
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.atelier-field input,
+.atelier-field textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid color-mix(in oklab, var(--atelier-ink) 22%, transparent);
+  background: transparent;
+  padding: 0.65rem 0;
+  color: var(--atelier-ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  letter-spacing: 0;
+  outline: none;
+  text-transform: none;
+  transition: border-color 300ms ease;
+}
+.atelier-field textarea {
+  resize: vertical;
+}
+.atelier-field input::placeholder,
+.atelier-field textarea::placeholder {
+  color: color-mix(in oklab, var(--atelier-ink) 35%, transparent);
+}
+.atelier-field input:focus,
+.atelier-field textarea:focus {
+  border-color: var(--atelier-gold);
+}
+.atelier-float {
+  animation: atelier-float 7s ease-in-out infinite;
+}
+@keyframes atelier-float {
+  0%,
+  100% {
+    transform: rotateY(-14deg) rotateZ(7deg) translate3d(0, 0, 2rem);
+  }
+  50% {
+    transform: rotateY(-10deg) rotateZ(3deg) translate3d(0, -0.75rem, 2rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+  .atelier-float {
+    animation: none;
+  }
+}
+
+/* ---- Atelier page hero ---- */
+.atelier-hero {
+  position: relative;
+  isolation: isolate;
+}
+.atelier-hero-veil {
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 70%;
+  z-index: 0;
+  filter: blur(60px);
+  opacity: 0.55;
+  pointer-events: none;
+  animation: atelier-veil 18s ease-in-out infinite alternate;
+}
+.atelier-hero-veil-rose {
+  background: radial-gradient(45% 60% at 75% 30%, var(--atelier-rose), transparent 70%);
+}
+.atelier-hero-veil-sage {
+  background: radial-gradient(45% 60% at 25% 30%, var(--atelier-sage), transparent 70%);
+}
+.atelier-hero-veil-gold {
+  background: radial-gradient(
+    45% 60% at 65% 25%,
+    color-mix(in oklab, var(--atelier-gold) 55%, transparent),
+    transparent 70%
+  );
+}
+@keyframes atelier-veil {
+  0% {
+    transform: translate3d(-2%, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(3%, 2%, 0) scale(1.08);
+  }
+}
+
+.atelier-hero-stage {
+  --px: 0;
+  --py: 0;
+}
+.atelier-hero-parallax-soft {
+  transform: translate3d(calc(var(--px) * -10px), calc(var(--py) * -8px), 0);
+  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.atelier-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  opacity: 0;
+  animation: atelier-fade-up 900ms cubic-bezier(0.16, 1, 0.3, 1) 80ms both;
+}
+.atelier-hero-rule {
+  display: block;
+  width: 0;
+  height: 1px;
+  background: var(--atelier-gold);
+  animation: atelier-rule 900ms cubic-bezier(0.16, 1, 0.3, 1) 260ms both;
+}
+@keyframes atelier-rule {
+  to {
+    width: 3.5rem;
+  }
+}
+
+.atelier-hero-word {
+  display: inline-block;
+  will-change: transform, opacity;
+  animation: atelier-word-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes atelier-word-up {
+  0% {
+    opacity: 0;
+    transform: translateY(105%) rotate(4deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+}
+.atelier-hero-fade {
+  animation: atelier-fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes atelier-fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.atelier-hero-media {
+  position: relative;
+  transform: translate3d(calc(var(--px) * 18px), calc(var(--py) * 14px), 0);
+  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.atelier-hero-frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--atelier-rose);
+  box-shadow: 1.1rem 1.1rem 0 color-mix(in oklab, var(--atelier-gold) 80%, transparent);
+  clip-path: inset(0 0 100% 0);
+  animation: atelier-wipe 1.25s cubic-bezier(0.76, 0, 0.24, 1) 320ms both;
+}
+@keyframes atelier-wipe {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+.atelier-hero-frame::after {
+  position: absolute;
+  inset: 1rem;
+  border: 1px solid color-mix(in oklab, var(--atelier-paper) 70%, transparent);
+  content: "";
+  pointer-events: none;
+}
+.atelier-hero-img {
+  transform: scale(1.16);
+  animation: atelier-kenburns 2.4s cubic-bezier(0.16, 1, 0.3, 1) 320ms both;
+}
+@keyframes atelier-kenburns {
+  to {
+    transform: scale(1);
+  }
+}
+.atelier-hero-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    color-mix(in oklab, var(--atelier-paper) 55%, transparent) 50%,
+    transparent 65%
+  );
+  transform: translateX(-120%);
+  animation: atelier-sheen 1.6s cubic-bezier(0.16, 1, 0.3, 1) 1.1s both;
+  pointer-events: none;
+}
+@keyframes atelier-sheen {
+  to {
+    transform: translateX(120%);
+  }
+}
+.atelier-hero-ring {
+  position: absolute;
+  top: -2.5rem;
+  left: -3rem;
+  width: 11rem;
+  height: 11rem;
+  border: 1px solid color-mix(in oklab, var(--atelier-gold) 60%, transparent);
+  border-radius: 50%;
+  animation:
+    atelier-ring 900ms cubic-bezier(0.16, 1, 0.3, 1) 900ms both,
+    atelier-drift 12s ease-in-out infinite alternate 2s;
+}
+@keyframes atelier-ring {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes atelier-drift {
+  0% {
+    translate: 0 0;
+  }
+  100% {
+    translate: 0.9rem -0.9rem;
+  }
+}
+.atelier-hero-square {
+  position: absolute;
+  right: -1.4rem;
+  bottom: -1.6rem;
+  width: 7rem;
+  height: 7rem;
+  border: 1px solid color-mix(in oklab, var(--atelier-ink) 25%, transparent);
+  animation:
+    atelier-fade-up 900ms cubic-bezier(0.16, 1, 0.3, 1) 1s both,
+    atelier-drift 14s ease-in-out infinite alternate 2s;
+}
+.atelier-hero-note {
+  position: absolute;
+  right: 1.6rem;
+  bottom: 1.6rem;
+  z-index: 2;
+  color: var(--atelier-paper);
+  font-family: var(--font-editorial);
+  font-size: 1.35rem;
+  font-style: italic;
+  line-height: 0.95;
+  text-align: right;
+  text-shadow: 0 1px 12px rgb(0 0 0 / 35%);
+  animation: atelier-fade-up 900ms cubic-bezier(0.16, 1, 0.3, 1) 1.3s both;
+}
+
+.atelier-marquee {
+  overflow: hidden;
+  border-top: 1px solid color-mix(in oklab, var(--atelier-ink) 12%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--atelier-ink) 12%, transparent);
+  background: color-mix(in oklab, var(--atelier-rose) 22%, var(--atelier-paper));
+  padding: 0.9rem 0;
+}
+.atelier-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: atelier-marquee 34s linear infinite;
+}
+.atelier-marquee-group {
+  display: flex;
+}
+.atelier-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  color: color-mix(in oklab, var(--atelier-ink) 55%, transparent);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.atelier-marquee-dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin: 0 2.2rem;
+  border-radius: 50%;
+  background: var(--atelier-gold);
+}
+@keyframes atelier-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atelier-hero-veil,
+  .atelier-hero-word,
+  .atelier-hero-fade,
+  .atelier-hero-eyebrow,
+  .atelier-hero-frame,
+  .atelier-hero-img,
+  .atelier-hero-sheen,
+  .atelier-hero-ring,
+  .atelier-hero-square,
+  .atelier-hero-note,
+  .atelier-marquee-track {
+    animation: none;
+  }
+  .atelier-hero-frame {
+    clip-path: none;
+  }
+  .atelier-hero-img {
+    transform: none;
+  }
+  .atelier-hero-rule {
+    width: 3.5rem;
+    animation: none;
+  }
+  .atelier-hero-sheen {
+    display: none;
+  }
+  .atelier-hero-media,
+  .atelier-hero-parallax-soft {
+    transform: none;
+  }
+}
+.atelier-hero-note {
+  white-space: pre-line;
+}
+
+/* ================================================================
+   Home page motion system
+   Everything below is scroll- or pointer-linked and collapses to a
+   static layout under prefers-reduced-motion (block at the end).
+   ================================================================ */
+
+/* ---- Parallax image frames ---- */
+/* Named `parallax-*`, not `px-*`: in a Tailwind codebase `px-` reads as
+   padding-inline. */
+.parallax-frame {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.parallax-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate3d(0, calc(var(--p, 0) * var(--px-speed, 70px)), 0)
+    scale(var(--px-scale, 1.3));
+  will-change: transform;
+}
+/* The wipe sits on the image rather than on .parallax-frame, which is the
+   element the IntersectionObserver watches. An element clipped to zero height
+   reports a zero intersection ratio, so a self-clipped frame would never reach
+   the observer's threshold and could never reveal itself. */
+.parallax-wipe {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.25s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.parallax-frame.is-in .parallax-wipe {
+  clip-path: inset(0 0 0 0);
+}
+/* Sheen that sweeps a frame once, just after it lands. */
+.parallax-sheen::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    color-mix(in oklab, white 40%, transparent) 50%,
+    transparent 62%
+  );
+  content: "";
+  pointer-events: none;
+  transform: translateX(-130%);
+}
+.parallax-sheen.is-in::after {
+  animation: home-sheen 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
+}
+@keyframes home-sheen {
+  to {
+    transform: translateX(130%);
+  }
+}
+
+/* ---- Word-by-word headings ---- */
+.split-text .st-mask {
+  display: inline-block;
+  overflow: hidden;
+  /* Side padding gives italic glyphs room to overhang their advance width so
+     the mask does not shave the last letter; the negative margins cancel it
+     back out, leaving word spacing exactly as it would be without the mask. */
+  padding: 0 0.14em 0.14em;
+  margin: 0 -0.14em;
+  vertical-align: bottom;
+}
+.split-text .st-word {
+  display: inline-block;
+  opacity: 0;
+  /* Clears the mask's padding-bottom as well as the line box. */
+  transform: translateY(135%) rotate(3deg);
+  transition:
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+.split-text.is-in .st-word {
+  opacity: 1;
+  transform: translateY(0) rotate(0);
+}
+
+/* ---- Pointer-tilted cards ---- */
+.tilt-card {
+  --rx: 0deg;
+  --ry: 0deg;
+  transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style: preserve-3d;
+  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(
+    28rem 28rem at var(--mx, 50%) var(--my, 50%),
+    color-mix(in oklab, white 26%, transparent),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 400ms ease;
+  pointer-events: none;
+}
+.tilt-card:hover .tilt-glare {
+  opacity: 1;
+}
+
+/* ---- Magnetic buttons ---- */
+.magnetic {
+  display: inline-block;
+  transform: translate3d(var(--mag-x, 0), var(--mag-y, 0), 0);
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---- Home marquee bands ---- */
+.home-marquee {
+  overflow: hidden;
+  padding: 1rem 0;
+}
+.home-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: home-marquee 38s linear infinite;
+}
+.home-marquee-track.is-reverse {
+  animation-direction: reverse;
+}
+.home-marquee:hover .home-marquee-track {
+  animation-play-state: paused;
+}
+.home-marquee-group {
+  display: flex;
+}
+.home-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.home-marquee-dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin: 0 2.2rem;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.5;
+}
+@keyframes home-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+/* Oversized display marquee for the closing call to action. */
+.home-marquee-display .home-marquee-item {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  font-style: italic;
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+.home-marquee-display .home-marquee-dot {
+  width: 9px;
+  height: 9px;
+  margin: 0 3rem;
+  opacity: 0.4;
+}
+
+/* ---- Scroll-drawn rule ---- */
+.draw-line {
+  /* No `display` here on purpose: this file is unlayered and would beat
+     Tailwind's layered `hidden` / `lg:block` utilities on the same element. */
+  width: 1px;
+  background: color-mix(in oklab, var(--hero-ink) 22%, transparent);
+  transform: scaleY(clamp(0, calc(1 - var(--p, 1)), 1));
+  transform-origin: 50% 0;
+}
+
+/* ---- Hover-fill cards ---- */
+.fill-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.fill-card::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--hero-ink);
+  content: "";
+  transform: translateY(101%);
+  transition: transform 650ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+.fill-card:hover::before {
+  transform: translateY(0);
+}
+
+/* ---- Sticky kitchen scroller ---- */
+.sticky-panel {
+  opacity: 0.2;
+  filter: saturate(0.4);
+  transform: scale(0.96);
+  transition:
+    opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 700ms ease,
+    transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sticky-panel.is-active {
+  opacity: 1;
+  filter: none;
+  transform: scale(1);
+}
+.sticky-step {
+  opacity: 0.3;
+  transform: translateX(-8px);
+  transition:
+    opacity 500ms ease,
+    transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sticky-step.is-active {
+  opacity: 1;
+  transform: none;
+}
+.sticky-step-bar {
+  display: block;
+  height: 1px;
+  background: var(--hero-gold-ink);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sticky-step.is-active .sticky-step-bar {
+  transform: scaleX(1);
+}
+
+/* ---- Copy that swaps in place as the sticky scroller advances ---- */
+.fade-swap {
+  animation: fade-swap 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes fade-swap {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* ---- Star rating ---- */
+.star {
+  opacity: 0;
+  transform: scale(0.4) rotate(-25deg);
+  transition:
+    opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.is-in .star {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Auto-rotating spotlight crossfade ---- */
+.fade-slide {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.fade-slide.is-active {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+/* ---- Ambient drifting glow behind dark bands ---- */
+.ambient-glow {
+  position: absolute;
+  inset: -30% -10%;
+  z-index: 0;
+  background: radial-gradient(
+    38% 55% at 30% 40%,
+    color-mix(in oklab, var(--hero-gold) 40%, transparent),
+    transparent 70%
+  );
+  filter: blur(70px);
+  opacity: 0.5;
+  animation: ambient-drift 20s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes ambient-drift {
+  to {
+    transform: translate3d(8%, 4%, 0) scale(1.15);
+  }
+}
+
+/* ---- Slow float for decorative cut-outs ---- */
+.slow-float {
+  animation: slow-float 9s ease-in-out infinite;
+}
+@keyframes slow-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-1.1rem) rotate(var(--float-rot, 3deg));
+  }
+}
+
+/* ---- Underline that wipes in from the left ---- */
+.wipe-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: background-size 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.wipe-underline:hover {
+  background-size: 100% 1px;
+}
+
+/* ---- Outlined button that fills on hover ---- */
+.fill-button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.fill-button::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  /* Not currentColor: the label flips to the light ink on hover, so the fill
+     has to stay dark or the button would disappear into itself. */
+  background: var(--hero-ink);
+  content: "";
+  transform: translateY(101%);
+  transition: transform 550ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+.fill-button:hover::before {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-glow {
+    display: none;
+  }
+  .parallax-img {
+    transform: none;
+  }
+  .parallax-wipe,
+  .parallax-frame.is-in .parallax-wipe {
+    clip-path: none;
+  }
+  .parallax-sheen.is-in::after {
+    display: none;
+  }
+  .split-text .st-word {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .tilt-card,
+  .magnetic {
+    transform: none;
+    transition: none;
+  }
+  .home-marquee-track {
+    animation: none;
+  }
+  .draw-line {
+    transform: none;
+  }
+  .fade-swap {
+    animation: none;
+  }
+  .sticky-panel,
+  .sticky-step,
+  .star,
+  .fade-slide {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+  .sticky-step-bar {
+    transform: scaleX(1);
+  }
+  .slow-float {
+    animation: none;
+  }
+}
+
+/* ================================================================
+   Mobile navigation
+   ================================================================ */
+
+/* Two bars that cross into an X. */
+.nav-toggle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-right: -0.75rem;
+}
+.nav-toggle-bar {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 500ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+.nav-toggle-bar:nth-of-type(1) {
+  transform: translateY(-0.28rem);
+}
+.nav-toggle-bar:nth-of-type(2) {
+  transform: translateY(0.28rem);
+}
+.nav-toggle.is-open .nav-toggle-bar:nth-of-type(1) {
+  transform: rotate(45deg);
+}
+.nav-toggle.is-open .nav-toggle-bar:nth-of-type(2) {
+  transform: rotate(-45deg);
+}
+
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  /* Clears the nav row the panel opens beneath. */
+  padding-top: 6.5rem;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-1.25rem);
+  transition:
+    opacity 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 520ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s linear 420ms;
+}
+.mobile-nav.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 520ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s;
+}
+
+/* Each row lifts in behind the one before it. */
+.mobile-nav-item {
+  opacity: 0;
+  transform: translateY(1.75rem);
+  transition:
+    opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mobile-nav.is-open .mobile-nav-item {
+  opacity: 1;
+  transform: none;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid color-mix(in oklab, currentColor 12%, transparent);
+  font-size: clamp(2.25rem, 13vw, 3.5rem);
+  font-style: italic;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.mobile-nav-index {
+  font-size: 0.7rem;
+  font-style: normal;
+  letter-spacing: 0.22em;
+}
+/* The label slides a touch to the right as it is pressed. */
+.mobile-nav-label {
+  display: inline-block;
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mobile-nav-link:active .mobile-nav-label {
+  transform: translateX(0.5rem);
+}
+.mobile-nav-link.is-current .mobile-nav-label {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.28em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-toggle-bar,
+  .mobile-nav,
+  .mobile-nav-item,
+  .mobile-nav-label {
+    transition: none;
+  }
+  .mobile-nav-item {
+    opacity: 1;
+    transform: none;
+  }
+}
