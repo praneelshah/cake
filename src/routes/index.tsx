@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, Clock3, MapPin, Star } from "lucide-react";
 
@@ -9,7 +9,6 @@ import homeIngredients from "@/assets/home-ingredients.jpg";
 import homeProcessPipe from "@/assets/home-process-pipe.jpg";
 import homeProving from "@/assets/home-proving.jpg";
 import homeSeasonal from "@/assets/home-seasonal.jpg";
-import macaronsSet from "@/assets/macarons-set.png";
 import patisserieMacarons from "@/assets/patisserie-macarons.jpg";
 import { HeroSlider } from "@/components/HeroSlider";
 import { Reveal } from "@/components/Reveal";
@@ -186,23 +185,13 @@ function StorySection() {
             </Reveal>
           </div>
 
-          <div className="relative">
-            <ParallaxImage
-              src={homeCounter}
-              alt="Warm bakery counter with glass cloches of pastries and shelves of bread behind"
-              className="parallax-sheen h-[26rem] sm:h-[34rem]"
-              speed={64}
-              scale={1.32}
-            />
-            <img
-              src={macaronsSet}
-              alt=""
-              aria-hidden="true"
-              loading="lazy"
-              className="slow-float pointer-events-none absolute -bottom-10 -left-8 w-28 select-none object-contain sm:w-40"
-              style={{ "--float-rot": "-4deg" } as CSSProperties}
-            />
-          </div>
+          <ParallaxImage
+            src={homeCounter}
+            alt="Warm bakery counter with glass cloches of pastries and shelves of bread behind"
+            className="parallax-sheen h-[26rem] sm:h-[34rem]"
+            speed={64}
+            scale={1.32}
+          />
         </div>
       </div>
     </section>

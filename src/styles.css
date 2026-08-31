@@ -1107,20 +1107,6 @@
   }
 }
 
-/* ---- Slow float for decorative cut-outs ---- */
-.slow-float {
-  animation: slow-float 9s ease-in-out infinite;
-}
-@keyframes slow-float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-1.1rem) rotate(var(--float-rot, 3deg));
-  }
-}
-
 /* ---- Underline that wipes in from the left ---- */
 .wipe-underline {
   background-image: linear-gradient(currentColor, currentColor);
@@ -1198,9 +1184,6 @@
   }
   .sticky-step-bar {
     transform: scaleX(1);
-  }
-  .slow-float {
-    animation: none;
   }
 }
 
