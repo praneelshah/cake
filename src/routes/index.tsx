@@ -2,14 +2,23 @@ import { useEffect, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, Clock3, MapPin, Star } from "lucide-react";
 
-import heroContact from "@/assets/hero-contact.jpg";
-import heroDessert from "@/assets/hero-dessert.jpg";
-import homeCounter from "@/assets/home-counter.jpg";
-import homeIngredients from "@/assets/home-ingredients.jpg";
-import homeProcessPipe from "@/assets/home-process-pipe.jpg";
-import homeProving from "@/assets/home-proving.jpg";
-import homeSeasonal from "@/assets/home-seasonal.jpg";
-import patisserieMacarons from "@/assets/patisserie-macarons.jpg";
+import blueberryCheesecake from "@/assets/shop/blueberry-cheesecake.jpg";
+import galBrownie from "@/assets/shop/brownie-slab.jpg";
+import galButterscotch from "@/assets/shop/butterscotch-honeycomb.jpg";
+import galChocolateMousse from "@/assets/shop/chocolate-mousse.jpg";
+import galFreshFruit from "@/assets/shop/fresh-fruit-cake.jpg";
+import galLotus from "@/assets/shop/lotus-biscoff-cheesecake.jpg";
+import galPineapple from "@/assets/shop/pineapple-cake.jpg";
+import galRedVelvet from "@/assets/shop/red-velvet-slice.jpg";
+import galRose from "@/assets/shop/rose-pistachio.jpg";
+import celebrationCrown from "@/assets/shop/celebration-crown.jpg";
+import celebrationGold from "@/assets/shop/celebration-gold.jpg";
+import celebrationTiered from "@/assets/shop/celebration-tiered.jpg";
+import shopCabinet from "@/assets/shop/shop-cabinet.jpg";
+import shopCounter from "@/assets/shop/shop-counter.jpg";
+import shopFront from "@/assets/shop/shop-front.jpg";
+import shopGifts from "@/assets/shop/shop-gifts.jpg";
+import shopThemeCakes from "@/assets/shop/shop-theme-cakes.jpg";
 import { HeroSlider } from "@/components/HeroSlider";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -23,21 +32,21 @@ import {
   TiltCard,
   useInView,
 } from "@/components/motion";
-import { menuItems } from "@/lib/menu-data";
+import { menuItems, type MenuItem } from "@/lib/menu-data";
 import { shop } from "@/lib/shop";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: `${shop.name} — Cake shop in Chandivali, Mumbai` },
+      { title: `${shop.name} — Cake shop in Sakinaka, Mumbai` },
       {
         name: "description",
-        content: `${shop.name} is a cake shop on Saki Vihar Road, Chandivali. Fresh cakes, brownies, cupcakes and custom celebration cakes, ${shop.hoursLine.toLowerCase()}.`,
+        content: `${shop.name} is a cake shop on Saki Vihar Road, Sakinaka — near Chandivali and Powai. Fresh cakes, brownies, cupcakes and custom celebration cakes, ${shop.hoursLine.toLowerCase()}.`,
       },
-      { property: "og:title", content: `${shop.name} — Cake shop in Chandivali, Mumbai` },
+      { property: "og:title", content: `${shop.name} — Cake shop in Sakinaka, Mumbai` },
       {
         property: "og:description",
-        content: `Fresh cakes, brownies and custom celebration cakes from ${shop.name}, Saki Vihar Road, Chandivali.`,
+        content: `Fresh cakes, brownies and custom celebration cakes from ${shop.name}, Saki Vihar Road, Sakinaka, Mumbai.`,
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -69,36 +78,54 @@ const pillars = [
   {
     number: "03",
     title: "Right around the corner",
-    body: `A short walk from Saki Naka on ${shop.address.short} — ${shop.address.landmark.toLowerCase()}.`,
+    body: "On Saki Vihar Road in Clipwala Compound — beside the bus stop, near Indus Gym, a short walk from Saki Naka.",
   },
 ];
 
+/** Photographed in the shop, so the copy describes what is actually pictured. */
 const kitchenSteps = [
   {
-    label: "Weighed",
-    title: "Good things, measured properly",
-    body: "Butter, cocoa, flour and vanilla go on the scale before anything goes in a bowl. The recipe never gets rushed.",
-    image: homeIngredients,
-    alt: "Bowls of butter, cocoa, flour, sugar and vanilla pods laid out on linen",
+    label: "The counter",
+    title: "Everything under glass",
+    body: "Pastries, slices, cheesecakes and desserts, set out in the chilled case and restocked through the day.",
+    image: shopCabinet,
+    alt: "Chilled display case at Amourea filled with pastries, slices and desserts",
   },
   {
-    label: "Rested",
-    title: "Time does half the work",
-    body: "Batters settle, sponges cool all the way down and creams are whipped only when they are about to be used.",
-    image: homeProving,
-    alt: "Dough resting in a floured proving basket in a dim bakery kitchen",
+    label: "The shelves",
+    title: "Something for the table too",
+    body: "Cookie packs, mugs, candles and gift boxes line the wall, so a cake can leave the shop already wrapped.",
+    image: shopGifts,
+    alt: "Shelves of mugs, gift boxes and packaged treats along the shop wall",
   },
   {
-    label: "Finished",
-    title: "The last hour is all hands",
-    body: "Layers are stacked, the crumb coat goes on and every rosette is piped by hand, one at a time.",
-    image: homeProcessPipe,
-    alt: "Baker piping pink cream rosettes onto a naked layer cake",
+    label: "The cabinet",
+    title: "Made to a brief",
+    body: "Photo cakes, tiered birthdays and 3D designer pieces — the display cabinet is a standing catalogue of what we can build.",
+    image: shopThemeCakes,
+    alt: "Lit cabinet of custom themed and tiered celebration cakes",
   },
 ];
 
+/** The shop's own product photography, one photo per cake — no repeats. */
+const gallery = [
+  { image: galLotus, label: "Lotus Biscoff cheesecake" },
+  { image: galRose, label: "Rose and pistachio cream" },
+  { image: galRedVelvet, label: "Red velvet, cut thick" },
+  { image: galBrownie, label: "Walnut brownie slab" },
+  { image: galButterscotch, label: "Butterscotch honeycomb" },
+  { image: galChocolateMousse, label: "Chocolate mousse" },
+  { image: galPineapple, label: "Pineapple fresh cream" },
+  { image: galFreshFruit, label: "Fresh fruit cake" },
+];
+
+/** Three signatures that read as a spread rather than three chocolate cakes. */
+const spotlightNames = ["Death by Choco Cake", "Red Velvet Cake", "Lotus Biscoff Cheese Cake"];
+
 function Index() {
-  const spotlight = menuItems.slice(0, 3);
+  const spotlight = spotlightNames
+    .map((name) => menuItems.find((item) => item.name === name))
+    .filter((item): item is MenuItem & { image: string } => Boolean(item?.image));
 
   return (
     <div className="min-h-screen bg-hero-bg text-hero-ink">
@@ -109,6 +136,7 @@ function Index() {
         <StorySection />
         <PillarsSection />
         <SpotlightSection items={spotlight} />
+        <GallerySection />
         <KitchenScroller />
         <SeasonalBand />
         <CelebrationSection />
@@ -186,8 +214,8 @@ function StorySection() {
           </div>
 
           <ParallaxImage
-            src={homeCounter}
-            alt="Warm bakery counter with glass cloches of pastries and shelves of bread behind"
+            src={shopCounter}
+            alt="The Amourea counter, with the pastry case and stocked shelves behind"
             className="parallax-sheen h-[26rem] sm:h-[34rem]"
             speed={64}
             scale={1.32}
@@ -228,7 +256,7 @@ function PillarsSection() {
 
 /* ---------------------------------------------------------------- */
 
-function SpotlightSection({ items }: { items: typeof menuItems }) {
+function SpotlightSection({ items }: { items: (MenuItem & { image: string })[] }) {
   return (
     <section className="w-full bg-hero-bg">
       <div className="mx-auto max-w-[1400px] px-6 py-24 sm:px-10 sm:py-32">
@@ -266,13 +294,15 @@ function SpotlightSection({ items }: { items: typeof menuItems }) {
                 />
               </TiltCard>
               <p className="mt-8 text-[0.65rem] tracking-[0.3em] uppercase text-hero-gold-ink">
-                {item.tag}
+                {item.group}
               </p>
               <h3 className="mt-3 font-display text-2xl text-hero-ink">{item.name}</h3>
               <p className="mx-auto mt-4 max-w-xs text-sm leading-loose text-hero-ink/60">
                 {item.body}
               </p>
-              <p className="mt-5 font-display text-lg italic text-hero-ink/80">{item.price}</p>
+              {item.price ? (
+                <p className="mt-5 font-display text-lg italic text-hero-ink/80">{item.price}</p>
+              ) : null}
             </Reveal>
           ))}
         </div>
@@ -287,6 +317,60 @@ function SpotlightSection({ items }: { items: typeof menuItems }) {
             </Link>
           </Magnetic>
         </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------------------------------------------------------- */
+
+function GallerySection() {
+  return (
+    <section className="w-full border-y border-hero-ink/10 bg-hero-tint">
+      <div className="mx-auto max-w-[1400px] px-6 py-20 sm:px-10 sm:py-28">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <Reveal as="p" className="text-[0.7rem] tracking-[0.34em] uppercase text-hero-gold-ink">
+              The counter
+            </Reveal>
+            <SplitText
+              as="h2"
+              text="Photographed at the shop"
+              className="mt-5 font-display text-3xl leading-[1.12] text-balance sm:text-4xl lg:text-5xl"
+              delay={100}
+              italicFrom={1}
+            />
+          </div>
+          <Reveal delay={200}>
+            <Link
+              to="/menu"
+              className="inline-flex items-center gap-2 text-[0.7rem] tracking-[0.28em] uppercase text-hero-ink wipe-underline"
+            >
+              All {menuItems.length} items <ArrowUpRight className="size-3.5" />
+            </Link>
+          </Reveal>
+        </div>
+
+        <div className="mt-14 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
+          {gallery.map((shot, i) => (
+            <Reveal key={shot.label} variant="rise" delay={(i % 4) * 110}>
+              <TiltCard className="relative overflow-hidden" strength={5}>
+                <span className="tilt-glare" aria-hidden="true" />
+                <img
+                  src={shot.image}
+                  alt={shot.label}
+                  width={1100}
+                  height={1100}
+                  loading="lazy"
+                  className="h-52 w-full object-cover transition-transform duration-[1200ms] ease-out hover:scale-105 sm:h-64"
+                />
+              </TiltCard>
+              <p className="mt-4 text-[0.65rem] tracking-[0.22em] uppercase text-hero-ink/55">
+                {shot.label}
+              </p>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -404,8 +488,8 @@ function SeasonalBand() {
   return (
     <section className="relative w-full overflow-hidden bg-hero-topbar text-hero-topbar-foreground">
       <ParallaxImage
-        src={homeSeasonal}
-        alt="Fig and honey tart on a ceramic plate in raking afternoon light"
+        src={blueberryCheesecake}
+        alt="Baked blueberry cheesecake on a wooden slab, scattered with fresh berries"
         className="h-[34rem] opacity-55 sm:h-[42rem]"
         speed={110}
         scale={1.42}
@@ -445,8 +529,8 @@ function CelebrationSection() {
             <TiltCard className="relative">
               <span className="tilt-glare" aria-hidden="true" />
               <ParallaxImage
-                src={homeProcessPipe}
-                alt="Piping pink cream rosettes onto a layered vanilla cake"
+                src={celebrationTiered}
+                alt="Two-tier custom birthday cake with a photo topper and gold detailing"
                 className="h-[18rem] sm:h-[26rem]"
                 speed={46}
                 scale={1.24}
@@ -457,8 +541,8 @@ function CelebrationSection() {
               <TiltCard className="relative">
                 <span className="tilt-glare" aria-hidden="true" />
                 <ParallaxImage
-                  src={heroDessert}
-                  alt="Caramel-topped cupcake with a tall swirl of fresh cream"
+                  src={celebrationGold}
+                  alt="Black and gold two-tier birthday cake personalised with a name"
                   className="h-[8rem] sm:h-[12rem]"
                   speed={34}
                   scale={1.3}
@@ -467,8 +551,8 @@ function CelebrationSection() {
               <TiltCard className="relative">
                 <span className="tilt-glare" aria-hidden="true" />
                 <ParallaxImage
-                  src={patisserieMacarons}
-                  alt="A tray of pastel macarons"
+                  src={celebrationCrown}
+                  alt="Leopard-print birthday cake finished with a gold crown topper"
                   className="h-[9rem] sm:h-[13rem]"
                   speed={40}
                   scale={1.3}
@@ -646,8 +730,8 @@ function VisitSection() {
           </div>
 
           <ParallaxImage
-            src={heroContact}
-            alt="Corner shopfront with bistro tables and warm afternoon light"
+            src={shopFront}
+            alt="The Amourea The Cake Atelier shopfront on Saki Vihar Road at night"
             className="parallax-sheen h-[24rem] sm:h-[32rem]"
             speed={62}
             scale={1.3}

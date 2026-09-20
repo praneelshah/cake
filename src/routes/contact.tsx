@@ -2,7 +2,7 @@ import { useState, type ReactNode } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, Clock3, Instagram, Mail, MapPin, Phone, Send, Star } from "lucide-react";
 
-import heroContact from "@/assets/hero-contact.jpg";
+import shopEntrance from "@/assets/shop/shop-entrance.jpg";
 import { AtelierHero } from "@/components/AtelierHero";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
@@ -12,15 +12,15 @@ import { shop, telHref } from "@/lib/shop";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: `Visit & Contact — ${shop.name}, Chandivali` },
+      { title: `Visit & Contact — ${shop.name}, Sakinaka` },
       {
         name: "description",
-        content: `Visit ${shop.name} on Saki Vihar Road in Chandivali, Mumbai, or send a note about a celebration cake, bulk order or special request.`,
+        content: `Visit ${shop.name} on Saki Vihar Road in Sakinaka, Mumbai, or send a note about a celebration cake, bulk order or special request.`,
       },
       { property: "og:title", content: `Visit & Contact — ${shop.name}` },
       {
         property: "og:description",
-        content: `Find ${shop.name} on Saki Vihar Road, Chandivali, or send a note about a celebration cake.`,
+        content: `Find ${shop.name} on Saki Vihar Road, Sakinaka, or send a note about a celebration cake.`,
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -38,8 +38,8 @@ function ContactPage() {
         eyebrow={`Find us / ${shop.address.short}`}
         titleLines={[{ text: "Come for the cake." }, { text: "Stay for a while.", italic: true }]}
         text={`Whether you are planning something special or simply need a good slice, there is a warm welcome waiting in ${shop.address.locality}.`}
-        image={heroContact}
-        imageAlt="Corner shopfront with bistro tables and warm afternoon light"
+        image={shopEntrance}
+        imageAlt="Looking in through the Amourea shopfront doors"
         note={"Take one\nfor the road"}
         accent="sage"
         marquee={[

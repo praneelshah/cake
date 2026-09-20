@@ -1191,11 +1191,12 @@
    Mobile navigation
    ================================================================ */
 
-/* Two bars that cross into an X. */
+/* Two bars that cross into an X.
+   No `display` here: this file is unlayered, so it would beat Tailwind's
+   layered `md:hidden` and leave the button showing on desktop. The element
+   carries `grid place-items-center md:hidden` instead. */
 .nav-toggle {
   position: relative;
-  display: grid;
-  place-items: center;
   width: 2.75rem;
   height: 2.75rem;
   margin-right: -0.75rem;
@@ -1220,12 +1221,12 @@
   transform: rotate(-45deg);
 }
 
+/* `display` and `flex-direction` live on the element as `flex flex-col
+   md:hidden`, for the same layering reason as .nav-toggle above. */
 .mobile-nav {
   position: fixed;
   inset: 0;
   z-index: 40;
-  display: flex;
-  flex-direction: column;
   /* Clears the nav row the panel opens beneath. */
   padding-top: 6.5rem;
   overflow-y: auto;

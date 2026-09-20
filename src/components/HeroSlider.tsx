@@ -37,7 +37,7 @@ const slides: Slide[] = [
     id: "baked-with-love",
     lines: ["Baked with love"],
     titleClass: "text-[13vw] leading-[0.95] sm:text-[11vw] lg:text-[8.5rem]",
-    text: "Cakes, brownies and cupcakes made fresh through the day at our counter on Saki Vihar Road, Chandivali.",
+    text: "Cakes, brownies and cupcakes made fresh through the day at our counter on Saki Vihar Road, Sakinaka.",
     images: [
       {
         src: s1i2,
@@ -107,16 +107,6 @@ const slides: Slide[] = [
         floatRot: "6deg",
         floatDelay: 1800,
       },
-      {
-        src: s1i1,
-        alt: "Pink macaron",
-        mobileClassName: "w-12",
-        className: "sm:right-[16%] sm:bottom-[4%] sm:w-[15%] sm:max-w-[200px]",
-        from: { x: "80px", y: "90px", rot: "-14deg" },
-        delay: 580,
-        floatRot: "-6deg",
-        floatDelay: 2400,
-      },
     ],
   },
   {
@@ -154,6 +144,17 @@ export function HeroSlider() {
 
   const go = useCallback((next: number) => {
     setIndex((current) => (next + slides.length) % slides.length);
+  }, []);
+
+  // Only the active slide's images are mounted, so without this the next
+  // slide's cut-outs are fetched at the moment it appears and pop in late.
+  useEffect(() => {
+    for (const s of slides) {
+      for (const image of s.images) {
+        const preload = new Image();
+        preload.src = image.src;
+      }
+    }
   }, []);
 
   useEffect(() => {

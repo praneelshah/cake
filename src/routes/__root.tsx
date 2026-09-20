@@ -74,13 +74,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: `${shop.name} — Cake shop in Chandivali, Mumbai` },
+      { title: `${shop.name} — Cake shop in Sakinaka, Mumbai` },
       {
         name: "description",
         content: `Fresh cakes, brownies, cupcakes and custom celebration cakes from ${shop.name} on Saki Vihar Road, ${shop.address.locality}, ${shop.address.city}.`,
       },
       { name: "author", content: shop.name },
-      { property: "og:title", content: `${shop.name} — Cake shop in Chandivali, Mumbai` },
+      { property: "og:title", content: `${shop.name} — Cake shop in Sakinaka, Mumbai` },
       {
         property: "og:description",
         content: `Fresh cakes, brownies and custom celebration cakes from ${shop.name}, ${shop.address.locality}.`,
@@ -122,7 +122,7 @@ const localBusinessJsonLd = JSON.stringify({
   address: {
     "@type": "PostalAddress",
     streetAddress: "Shop No. 3, Clipwala Compound, Saki Vihar Road, Tunga Gaon",
-    addressLocality: "Chandivali, Saki Naka, Mumbai",
+    addressLocality: "Sakinaka, Mumbai",
     addressRegion: "Maharashtra",
     postalCode: "400072",
     addressCountry: "IN",

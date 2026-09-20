@@ -6,17 +6,17 @@ import { AtelierHero } from "@/components/AtelierHero";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
-import heroMenu from "@/assets/hero-menu.jpg";
-import { menuItems } from "@/lib/menu-data";
+import shopPastryCase from "@/assets/shop/shop-pastry-case.jpg";
+import { menuCategories, menuItems } from "@/lib/menu-data";
 import { shop } from "@/lib/shop";
 
 export const Route = createFileRoute("/menu")({
   head: () => ({
     meta: [
-      { title: `The Menu — ${shop.name}, Chandivali` },
+      { title: `The Menu — ${shop.name}, Sakinaka` },
       {
         name: "description",
-        content: `Cakes, slices, brownies and cupcakes from ${shop.name} on Saki Vihar Road, Chandivali. Custom celebration cakes made to order.`,
+        content: `Cakes, slices, brownies and cupcakes from ${shop.name} on Saki Vihar Road, Sakinaka. Custom celebration cakes made to order.`,
       },
       { property: "og:title", content: `The Menu — ${shop.name}` },
       {
@@ -30,15 +30,13 @@ export const Route = createFileRoute("/menu")({
   component: MenuPage,
 });
 
-const categories = ["All", "Cake", "Slice", "Bake"] as const;
-
 function MenuPage() {
-  const [activeCategory, setActiveCategory] = useState<(typeof categories)[number]>("All");
+  const [activeCategory, setActiveCategory] = useState<(typeof menuCategories)[number]>("All");
   const visibleItems = useMemo(
     () =>
       activeCategory === "All"
         ? menuItems
-        : menuItems.filter((item) => item.tag === activeCategory),
+        : menuItems.filter((item) => item.category === activeCategory),
     [activeCategory],
   );
 
@@ -48,17 +46,19 @@ function MenuPage() {
         eyebrow={`From the counter / opens ${shop.opensAt}`}
         titleLines={[{ text: "What we" }, { text: "bake today.", italic: true }]}
         text="Whole cakes, thick slices and everyday bakes, made in fresh batches through the day and set out while they are still at their best."
-        image={heroMenu}
-        imageAlt="Tiered stand of cakes and pastries on a marble counter"
+        image={shopPastryCase}
+        imageAlt="The chilled pastry case at Amourea, filled for the day"
         note={"No. 01\nthe first bite"}
         accent="rose"
         marquee={[
-          "Chocolate truffle",
-          "Red velvet",
-          "Butterscotch",
+          "Death by Choco",
+          "Ferrero Rocher",
+          "Red Velvet",
+          "Lotus Biscoff",
+          "Dutch Truffle",
+          "Black Forest",
+          "Tres Leches",
           "Brownies",
-          "Cupcakes",
-          "Custom cakes",
         ]}
       />
 
@@ -70,7 +70,7 @@ function MenuPage() {
           <div className="mx-auto max-w-[1400px]">
             <div className="flex flex-wrap items-center justify-between gap-6">
               <div className="flex flex-wrap gap-3" aria-label="Filter menu by category">
-                {categories.map((category) => (
+                {menuCategories.map((category) => (
                   <Button
                     key={category}
                     type="button"
@@ -103,19 +103,37 @@ function MenuPage() {
                   className={`group lg:col-span-4 ${i % 3 === 1 ? "lg:mt-14" : ""}`}
                 >
                   <div className="atelier-product-frame atelier-depth">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      width={1200}
-                      height={1504}
-                      loading="lazy"
-                      className="h-[30rem] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    />
+                    {item.image ? (
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        width={960}
+                        height={960}
+                        loading="lazy"
+                        className="h-[30rem] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      />
+                    ) : (
+                      // A few items have no photo on the listing; a typographic
+                      // card is honest, where borrowing another cake's photo
+                      // would not be.
+                      <div className="flex h-[30rem] w-full items-center justify-center bg-atelier-rose/60 px-8">
+                        <p className="text-center font-editorial text-4xl italic text-atelier-ink/70">
+                          {item.name}
+                        </p>
+                      </div>
+                    )}
                     <span className="atelier-product-index">{String(i + 1).padStart(2, "0")}</span>
                   </div>
                   <div className="mt-6 flex items-baseline justify-between gap-4">
-                    <p className="atelier-kicker text-atelier-gold">{item.tag}</p>
-                    <p className="font-editorial text-xl italic text-atelier-gold">{item.price}</p>
+                    <p className="atelier-kicker flex items-center gap-2 text-atelier-gold">
+                      <VegMark veg={item.veg} />
+                      {item.group}
+                    </p>
+                    {item.price ? (
+                      <p className="font-editorial text-xl italic text-atelier-gold">
+                        {item.price}
+                      </p>
+                    ) : null}
                   </div>
                   <h2 className="mt-2 font-editorial text-3xl leading-none text-atelier-ink">
                     {item.name}
@@ -123,14 +141,14 @@ function MenuPage() {
                   <p className="mt-4 max-w-sm font-body text-sm leading-relaxed text-atelier-ink/60">
                     {item.body}
                   </p>
-                  <p className="sr-only">Price {item.price}</p>
                 </Reveal>
               ))}
             </div>
 
             <p className="mt-20 max-w-2xl font-body text-xs leading-relaxed text-atelier-ink/45">
-              Whole cakes are made to order — give us a day&apos;s notice where you can. Prices and
-              sizes may vary; call the shop to confirm before you plan around one.
+              Counter prices, GST extra. Ordering through Swiggy or Zomato costs more — their
+              listing carries its own rates. Whole cakes are made to order, so give us a day&apos;s
+              notice where you can, and call to confirm before you plan around a price.
             </p>
           </div>
         </section>
@@ -159,7 +177,17 @@ function MenuPage() {
                 flavour, finish and number of slices.
               </Reveal>
             </div>
-            <Reveal delay={280}>
+            <Reveal delay={280} className="flex flex-wrap gap-4">
+              {shop.orderUrl ? (
+                <Button
+                  asChild
+                  className="rounded-none bg-atelier-paper px-7 py-6 font-body text-[0.7rem] tracking-[0.28em] uppercase text-atelier-ink hover:bg-atelier-gold hover:text-atelier-paper"
+                >
+                  <a href={shop.orderUrl} target="_blank" rel="noreferrer noopener">
+                    Order online <ArrowUpRight />
+                  </a>
+                </Button>
+              ) : null}
               <Button
                 asChild
                 variant="outline"
@@ -176,5 +204,24 @@ function MenuPage() {
 
       <SiteFooter variant="atelier" />
     </div>
+  );
+}
+
+/** The green/brown square every Indian menu carries. */
+function VegMark({ veg }: { veg: boolean }) {
+  const label = veg ? "Vegetarian" : "Contains egg or non-vegetarian";
+  return (
+    <span
+      title={label}
+      className={`inline-flex size-3 shrink-0 items-center justify-center border ${
+        veg ? "border-green-700" : "border-red-800"
+      }`}
+    >
+      <span className="sr-only">{label}</span>
+      <span
+        aria-hidden="true"
+        className={`size-1.5 rounded-full ${veg ? "bg-green-700" : "bg-red-800"}`}
+      />
+    </span>
   );
 }

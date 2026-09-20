@@ -69,8 +69,10 @@ export function SiteHeader({ variant = "hero" }: SiteHeaderProps) {
         </div>
       ) : null}
 
-      {/* Main nav */}
-      <nav className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-6 py-6 sm:px-10">
+      {/* Main nav. Positioned and above the panel's z-40: the panel is a
+          sibling inside this wrapper, so a static nav would be painted over
+          by it and the close button would be unreachable. */}
+      <nav className="relative z-50 mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-6 py-6 sm:px-10">
         <Link
           to="/"
           onClick={() => setOpen(false)}
@@ -106,7 +108,7 @@ export function SiteHeader({ variant = "hero" }: SiteHeaderProps) {
           onClick={() => setOpen((value) => !value)}
           aria-expanded={open}
           aria-controls="site-mobile-nav"
-          className={`nav-toggle md:hidden ${open ? "is-open" : ""} ${
+          className={`nav-toggle grid place-items-center md:hidden ${open ? "is-open" : ""} ${
             isAtelier ? "text-atelier-ink" : "text-hero-ink"
           }`}
         >
@@ -120,7 +122,7 @@ export function SiteHeader({ variant = "hero" }: SiteHeaderProps) {
           opens it is still on top to close it. */}
       <div
         id="site-mobile-nav"
-        className={`mobile-nav md:hidden ${open ? "is-open" : ""} ${
+        className={`mobile-nav flex flex-col md:hidden ${open ? "is-open" : ""} ${
           isAtelier ? "bg-atelier-paper text-atelier-ink" : "bg-hero-bg text-hero-ink"
         }`}
       >

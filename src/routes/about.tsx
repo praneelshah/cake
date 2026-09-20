@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 
-import heroAbout from "@/assets/hero-about.jpg";
-import aboutCake from "@/assets/about-cake.jpg";
+import shopDisplay from "@/assets/shop/shop-display.jpg";
+import belgianTruffle from "@/assets/shop/belgian-truffle.jpg";
 import { AtelierHero } from "@/components/AtelierHero";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -12,10 +12,10 @@ import { shop } from "@/lib/shop";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: `Our Story — ${shop.name}, Chandivali` },
+      { title: `Our Story — ${shop.name}, Sakinaka` },
       {
         name: "description",
-        content: `Step inside ${shop.name}, a dedicated cake shop on Saki Vihar Road in Chandivali, Mumbai, built around patient work, honest ingredients and cake made to order.`,
+        content: `Step inside ${shop.name}, a dedicated cake shop on Saki Vihar Road in Sakinaka, Mumbai, built around patient work, honest ingredients and cake made to order.`,
       },
       { property: "og:title", content: `Our Story — ${shop.name}` },
       {
@@ -40,7 +40,7 @@ const principles = [
   ],
   [
     "03 / Neighbours",
-    "We bake for the flats, offices and gyms around Chandivali — most of what leaves the counter is walking home.",
+    "We bake for the flats, offices and gyms around Saki Vihar Road — most of what leaves the counter is walking home.",
   ],
   [
     "04 / Occasion",
@@ -58,8 +58,8 @@ function AboutPage() {
           { text: "for the neighbourhood.", italic: true },
         ]}
         text={`${shop.name} is a full cake kitchen on Saki Vihar Road. We bake in fresh batches through the day, take orders for the occasions that matter, and believe the best part of a cake is the quiet second after the first bite.`}
-        image={heroAbout}
-        imageAlt="Baker working dough on a flour-dusted counter in warm morning light"
+        image={shopDisplay}
+        imageAlt="The Amourea display counter, lined with pastries and desserts"
         note={"A morning\nin the kitchen"}
         accent="gold"
         marquee={[
@@ -106,8 +106,8 @@ function AboutPage() {
               className="atelier-photo-frame atelier-photo-frame-small atelier-depth"
             >
               <img
-                src={aboutCake}
-                alt="Slice of layered chocolate cake on a plate with a cocoa truffle"
+                src={belgianTruffle}
+                alt="Belgian truffle cake ringed with piped chocolate and truffle balls"
                 width={1200}
                 height={912}
                 loading="lazy"

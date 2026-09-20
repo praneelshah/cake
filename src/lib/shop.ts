@@ -31,7 +31,8 @@ type Shop = {
 };
 
 export const shop: Shop = {
-  name: "Amourea Cake",
+  /** The full trading name as it appears on the Zomato listing. */
+  name: "Amourea The Cake Atelier",
   short: "Amourea",
   category: "Cake shop",
 
@@ -43,29 +44,31 @@ export const shop: Shop = {
   opensAt: "10 am",
   hoursLine: "Open daily from 10 am",
 
+  /** Address exactly as printed on the shop's own menu card. */
   address: {
     lines: [
-      "Shop No. 3, Clipwala Compound",
-      "Saki Vihar Road, beside the bus stop",
-      "Near Indus Gym, Tunga Gaon, Chandivali",
-      "Saki Naka, Mumbai, Maharashtra 400072",
+      "Shop No. R-4, Clipwala Compound",
+      "Tunga Gaon, Saki Vihar Road",
+      "Sakinaka, Mumbai - 400072",
     ],
-    locality: "Chandivali, Saki Naka",
+    locality: "Sakinaka",
     city: "Mumbai",
-    short: "Saki Vihar Road, Chandivali",
+    short: "Saki Vihar Road, Sakinaka",
     landmark: "Beside the bus stop, near Indus Gym",
   },
 
   mapsUrl:
-    "https://www.google.com/maps/search/?api=1&query=Amourea+cake+Saki+Vihar+Road+Chandivali+Mumbai",
+    "https://www.google.com/maps/search/?api=1&query=Amourea+The+Cake+Atelier+Clipwala+Compound+Saki+Vihar+Road+Sakinaka+Mumbai",
 
-  // TODO: add the shop's real details — each one appears on the site once set.
-  phone: "",
-  whatsapp: "",
-  email: "",
-  instagram: "",
-  instagramUrl: "",
-  orderUrl: "",
+  /** Zomato ordering page for the Saki Vihar Road kitchen. */
+  orderUrl: "https://www.zomato.com/mumbai/amourea-the-cake-atelier-1-powai/order",
+
+  /** All from the shop's menu card. */
+  phone: "+91 99677 37008",
+  whatsapp: "919967737008",
+  email: "amoureacake@gmail.com",
+  instagram: "@Amoureacake",
+  instagramUrl: "https://www.instagram.com/amoureacake/",
 };
 
 /** Digits only, for tel: and wa.me links. */
