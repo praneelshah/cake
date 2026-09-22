@@ -309,6 +309,11 @@
 /* ---- Artisanal boutique interiors ---- */
 .atelier-page {
   font-family: var(--font-body);
+  /* The left/right reveal variants sit translated on the X axis until they
+     scroll into view, which pushes a scrollbar onto wide screens. clip (not
+     hidden) contains them without creating a scroll container, so the sticky
+     positioning elsewhere keeps working. */
+  overflow-x: clip;
 }
 .atelier-page h1,
 .atelier-page h2,
@@ -479,6 +484,7 @@
   text-transform: uppercase;
 }
 .atelier-field input,
+.atelier-field select,
 .atelier-field textarea {
   width: 100%;
   border: 0;
@@ -496,11 +502,22 @@
 .atelier-field textarea {
   resize: vertical;
 }
+.atelier-field select {
+  appearance: none;
+  border-radius: 0;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: right 0.7rem center, right 0.35rem center;
+  background-size: 0.35rem 0.35rem, 0.35rem 0.35rem;
+  background-repeat: no-repeat;
+  padding-right: 1.6rem;
+}
 .atelier-field input::placeholder,
 .atelier-field textarea::placeholder {
   color: color-mix(in oklab, var(--atelier-ink) 35%, transparent);
 }
 .atelier-field input:focus,
+.atelier-field select:focus,
 .atelier-field textarea:focus {
   border-color: var(--atelier-gold);
 }

@@ -5,6 +5,7 @@ import { shop, telHref } from "@/lib/shop";
 const pages = [
   { label: "Home", to: "/" },
   { label: "Menu", to: "/menu" },
+  { label: "Custom Cakes", to: "/custom" },
   { label: "About", to: "/about" },
   { label: "Contact", to: "/contact" },
 ] as const;
