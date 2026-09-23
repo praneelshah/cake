@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, ImagePlus, MessageCircle, Phone, Trash2 } from "lucide-react";
+import { ArrowUpRight, ImagePlus, Mail, MessageCircle, Phone, Send, Trash2 } from "lucide-react";
 
 import customBigBoss from "@/assets/shop/custom-bigboss.jpg";
 import customBrief from "@/assets/shop/custom-brief.jpg";
@@ -70,7 +70,7 @@ const madeHere = [
   },
 ];
 
-/** The shop takes custom orders over WhatsApp, so the form composes one. */
+/** No backend, so the form composes an email to the shop rather than posting one. */
 function CustomCakePage() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -79,7 +79,7 @@ function CustomCakePage() {
   const [brief, setBrief] = useState("");
   const [photo, setPhoto] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
-  const [handedOff, setHandedOff] = useState<"shared" | "whatsapp" | null>(null);
+  const [handedOff, setHandedOff] = useState<"shared" | "email" | null>(null);
   const fileRef = useRef<HTMLInputElement | null>(null);
 
   // Object URLs have to be released or the blob stays in memory.
@@ -93,6 +93,7 @@ function CustomCakePage() {
     return () => URL.revokeObjectURL(url);
   }, [photo]);
 
+  const subject = `Personalised cake enquiry${name ? ` — ${name}` : ""}`;
   const message = [
     `Hello ${shop.short}, I would like to order a personalised cake.`,
     "",
@@ -111,23 +112,22 @@ function CustomCakePage() {
     event.preventDefault();
 
     // On a phone the share sheet can carry the reference picture along with
-    // the text, which is the only way the photo reaches WhatsApp directly.
+    // the text, so the customer can pick their mail app and the photograph
+    // travels with the brief. A mailto: link cannot carry an attachment.
     if (photo && typeof navigator !== "undefined" && navigator.canShare?.({ files: [photo] })) {
       try {
-        await navigator.share({ text: message, files: [photo] });
+        await navigator.share({ title: subject, text: message, files: [photo] });
         setHandedOff("shared");
         return;
       } catch {
-        // Cancelled or unsupported — fall through to the link below.
+        // Cancelled or unsupported — fall through to the mail link below.
       }
     }
 
-    window.open(
-      `https://wa.me/${shop.whatsapp}?text=${encodeURIComponent(message)}`,
-      "_blank",
-      "noopener",
-    );
-    setHandedOff("whatsapp");
+    window.location.href = `mailto:${shop.email}?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(message)}`;
+    setHandedOff("email");
   }
 
   return (
@@ -261,11 +261,19 @@ function CustomCakePage() {
                 delay={180}
                 className="mt-6 max-w-sm font-body text-sm leading-relaxed text-atelier-ink/60"
               >
-                Fill this in and it opens a WhatsApp message to the shop with your details already
-                written out. We usually reply the same day.
+                Fill this in and it reaches us by email, with your details already written out. We
+                usually reply the same day.
               </Reveal>
 
               <Reveal delay={260} className="mt-10 space-y-3 font-body text-sm">
+                {shop.email ? (
+                  <a
+                    href={`mailto:${shop.email}`}
+                    className="flex items-center gap-3 text-atelier-ink/70 transition-colors hover:text-atelier-gold"
+                  >
+                    <Mail className="size-4" /> {shop.email}
+                  </a>
+                ) : null}
                 {shop.phone ? (
                   <a
                     href={telHref}
@@ -280,7 +288,7 @@ function CustomCakePage() {
                   rel="noreferrer noopener"
                   className="flex items-center gap-3 text-atelier-ink/70 transition-colors hover:text-atelier-gold"
                 >
-                  <MessageCircle className="size-4" /> Message us on WhatsApp
+                  <MessageCircle className="size-4" /> Or message us on WhatsApp
                 </a>
               </Reveal>
 
@@ -420,7 +428,7 @@ function CustomCakePage() {
                 type="submit"
                 className="mt-8 rounded-none bg-atelier-ink px-7 py-6 font-body text-xs tracking-[0.2em] uppercase text-atelier-paper hover:bg-atelier-gold"
               >
-                Send on WhatsApp <MessageCircle />
+                Send <Send />
               </Button>
 
               {handedOff ? (
@@ -429,15 +437,16 @@ function CustomCakePage() {
                   className="mt-6 font-body text-sm leading-relaxed text-atelier-gold"
                 >
                   {handedOff === "shared"
-                    ? "Your brief and picture were handed to WhatsApp — send the message and we'll take it from there."
+                    ? "Your brief and picture were handed to your mail app — press send there and it reaches us."
                     : photo
-                      ? "WhatsApp is open with your details. Attach the picture you chose in the chat — a browser can't send it across for you."
-                      : "WhatsApp is open with your details. Send the message and we'll take it from there."}
+                      ? `Your mail app is open with the brief addressed to ${shop.email}. Attach the picture you chose before sending — a browser cannot add it for you.`
+                      : `Your mail app is open with the brief addressed to ${shop.email}. Press send there and it reaches us.`}
                 </p>
               ) : (
                 <p className="mt-6 font-body text-xs leading-relaxed text-atelier-ink/45">
-                  This opens WhatsApp with your brief written out. On a phone your picture goes with
-                  it; on a computer you will need to attach it in the chat.
+                  This opens your mail app with the brief written out and addressed to us. On a
+                  phone your picture goes with it; on a computer you will need to attach it before
+                  sending.
                 </p>
               )}
             </form>
