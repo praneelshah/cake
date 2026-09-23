@@ -11,9 +11,9 @@ import galLotus from "@/assets/shop/lotus-biscoff-cheesecake.jpg";
 import galPineapple from "@/assets/shop/pineapple-cake.jpg";
 import galRedVelvet from "@/assets/shop/red-velvet-slice.jpg";
 import galRose from "@/assets/shop/rose-pistachio.jpg";
-import celebrationCrown from "@/assets/shop/celebration-crown.jpg";
-import celebrationGold from "@/assets/shop/celebration-gold.jpg";
-import celebrationTiered from "@/assets/shop/celebration-tiered.jpg";
+import celebrationFlake from "@/assets/shop/celebration-flake.jpg";
+import celebrationRaspberry from "@/assets/shop/celebration-raspberry.jpg";
+import celebrationRedVelvet from "@/assets/shop/celebration-redvelvet.jpg";
 import shopCabinet from "@/assets/shop/shop-cabinet.jpg";
 import shopCounter from "@/assets/shop/shop-counter.jpg";
 import shopFront from "@/assets/shop/shop-front.jpg";
@@ -529,8 +529,8 @@ function CelebrationSection() {
             <TiltCard className="relative">
               <span className="tilt-glare" aria-hidden="true" />
               <ParallaxImage
-                src={celebrationTiered}
-                alt="Two-tier custom birthday cake with a photo topper and gold detailing"
+                src={celebrationFlake}
+                alt="Chocolate flake cake finished with piped rosettes and the Amourea crest"
                 className="h-[18rem] sm:h-[26rem]"
                 speed={46}
                 scale={1.24}
@@ -541,8 +541,8 @@ function CelebrationSection() {
               <TiltCard className="relative">
                 <span className="tilt-glare" aria-hidden="true" />
                 <ParallaxImage
-                  src={celebrationGold}
-                  alt="Black and gold two-tier birthday cake personalised with a name"
+                  src={celebrationRedVelvet}
+                  alt="Red velvet cake dressed with roses and a ribbon"
                   className="h-[8rem] sm:h-[12rem]"
                   speed={34}
                   scale={1.3}
@@ -551,8 +551,8 @@ function CelebrationSection() {
               <TiltCard className="relative">
                 <span className="tilt-glare" aria-hidden="true" />
                 <ParallaxImage
-                  src={celebrationCrown}
-                  alt="Leopard-print birthday cake finished with a gold crown topper"
+                  src={celebrationRaspberry}
+                  alt="Square chocolate and raspberry cake on a wooden board"
                   className="h-[9rem] sm:h-[13rem]"
                   speed={40}
                   scale={1.3}
@@ -607,10 +607,10 @@ function CelebrationSection() {
             <Reveal delay={620}>
               <Magnetic>
                 <Link
-                  to="/contact"
+                  to="/custom"
                   className="fill-button mt-10 inline-flex items-center gap-2 border border-hero-ink px-9 py-4 text-[0.7rem] tracking-[0.28em] uppercase text-hero-ink transition-colors duration-500 hover:text-hero-bg"
                 >
-                  Ask about a cake <ArrowUpRight className="size-3.5" />
+                  Design your cake <ArrowUpRight className="size-3.5" />
                 </Link>
               </Magnetic>
             </Reveal>

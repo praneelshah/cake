@@ -2,7 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, ImagePlus, MessageCircle, Phone, Trash2 } from "lucide-react";
 
+import customBigBoss from "@/assets/shop/custom-bigboss.jpg";
 import customCabinet from "@/assets/shop/custom-cabinet.jpg";
+import customFarhan from "@/assets/shop/custom-farhan.jpg";
+import customQueen from "@/assets/shop/custom-queen.jpg";
 import { AtelierHero } from "@/components/AtelierHero";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -42,6 +45,28 @@ const steps = [
     "03 / We bake it",
     "Confirmed orders need at least 24 hours, and longer for tiered or sculpted cakes. Collect from the shop, or send it on delivery.",
   ],
+];
+
+/** Cakes the shop has actually built, not stock photography. */
+const madeHere = [
+  {
+    image: customBigBoss,
+    title: "Two tiers, one inside joke",
+    body: "A photo topper, a signpost of nicknames, an employer's logo and a scatter of notes and coins. Everything on it was asked for by name.",
+    alt: "Two-tier black and gold birthday cake with a photo panel, signpost topper and money detailing",
+  },
+  {
+    image: customFarhan,
+    title: "Black and gold, named in fondant",
+    body: "A two-tier fondant cake finished with gold nuggets, printed notes and the name spelled out on the board.",
+    alt: "Two-tier black fondant cake with gold nuggets, printed notes and a name on the board",
+  },
+  {
+    image: customQueen,
+    title: "One tier, all statement",
+    body: "A split leopard panel, hand-lettered gold and a crown on top. Proof that a single tier can carry a whole theme.",
+    alt: "Single-tier black cake with a leopard-print panel, gold lettering and a crown topper",
+  },
 ];
 
 /** The shop takes custom orders over WhatsApp, so the form composes one. */
@@ -153,8 +178,69 @@ function CustomCakePage() {
           </div>
         </section>
 
+        {/* Cakes we have actually built */}
+        <section className="px-6 py-16 sm:px-10 sm:py-24" aria-label="Past custom cakes">
+          <div className="mx-auto max-w-[1400px]">
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <div>
+                <Reveal as="p" className="atelier-kicker text-atelier-gold">
+                  Made here
+                </Reveal>
+                <Reveal
+                  as="h2"
+                  variant="rise"
+                  delay={100}
+                  className="mt-5 max-w-lg font-editorial text-5xl leading-[0.9] sm:text-6xl"
+                >
+                  A few we have <em>already built.</em>
+                </Reveal>
+              </div>
+              <Reveal
+                as="p"
+                delay={180}
+                className="max-w-xs font-body text-sm leading-relaxed text-atelier-ink/55"
+              >
+                Every one of these started as a picture and a paragraph, much like the form below.
+              </Reveal>
+            </div>
+
+            <div className="mt-14 grid gap-x-8 gap-y-14 sm:grid-cols-3">
+              {madeHere.map((cake, i) => (
+                <Reveal
+                  key={cake.title}
+                  as="article"
+                  variant="rise"
+                  delay={i * 130}
+                  className="group"
+                >
+                  <div className="atelier-product-frame atelier-depth">
+                    <img
+                      src={cake.image}
+                      alt={cake.alt}
+                      width={1200}
+                      height={1200}
+                      loading="lazy"
+                      className="h-[26rem] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 sm:h-[30rem]"
+                    />
+                    <span className="atelier-product-index">0{i + 1}</span>
+                  </div>
+                  <h3 className="mt-6 font-editorial text-2xl leading-tight text-atelier-ink">
+                    {cake.title}
+                  </h3>
+                  <p className="mt-3 max-w-sm font-body text-sm leading-relaxed text-atelier-ink/60">
+                    {cake.body}
+                  </p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* The brief */}
-        <section className="px-6 py-16 sm:px-10 sm:py-24" aria-label="Personalised cake enquiry">
+        <section
+          className="border-t border-atelier-ink/10 px-6 py-16 sm:px-10 sm:py-24"
+          aria-label="Personalised cake enquiry"
+        >
           <div className="mx-auto grid max-w-[1400px] gap-14 lg:grid-cols-[0.7fr_1.3fr]">
             <div>
               <Reveal as="p" className="atelier-kicker text-atelier-gold">
