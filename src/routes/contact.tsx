@@ -122,7 +122,7 @@ function ContactPage() {
           </div>
         </section>
 
-        <section className="bg-atelier-rose/25 px-6 py-16 sm:px-10 sm:py-24">
+        <section className="px-6 py-16 sm:px-10 sm:py-24">
           <div className="mx-auto grid max-w-[1400px] gap-14 lg:grid-cols-[0.7fr_1.3fr]">
             <div>
               <p className="atelier-kicker">Send a note</p>

@@ -408,7 +408,7 @@ function CustomCakePage() {
                   <button
                     type="button"
                     onClick={() => fileRef.current?.click()}
-                    className="mt-1 flex w-full items-center justify-center gap-3 border border-dashed border-atelier-ink/25 bg-atelier-rose/20 px-6 py-8 font-body text-xs normal-case tracking-normal text-atelier-ink/55 transition-colors hover:border-atelier-gold hover:text-atelier-gold"
+                    className="mt-1 flex w-full items-center justify-center gap-3 border border-dashed border-atelier-ink/25 bg-atelier-paper/80 px-6 py-8 font-body text-xs normal-case tracking-normal text-atelier-ink/55 transition-colors hover:border-atelier-gold hover:text-atelier-gold"
                   >
                     <ImagePlus className="size-4" />
                     Add a picture of the cake you have in mind

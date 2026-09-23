@@ -469,10 +469,13 @@
   border: 1px solid var(--atelier-gold);
   content: "";
 }
+/* A tinted card rather than paper: the form used to sit paper-on-paper with
+   only its drop shadow to define it, which read as a flat empty area. The
+   gold offset gives the edge some weight. */
 .atelier-form {
-  background: var(--atelier-paper);
+  background: color-mix(in oklab, var(--atelier-rose) 32%, var(--atelier-paper));
   padding: clamp(1.5rem, 5vw, 4rem);
-  box-shadow: 1rem 1rem 0 color-mix(in oklab, var(--atelier-rose) 70%, transparent);
+  box-shadow: 1rem 1rem 0 color-mix(in oklab, var(--atelier-gold) 50%, transparent);
 }
 .atelier-field {
   display: grid;
@@ -488,7 +491,7 @@
 .atelier-field textarea {
   width: 100%;
   border: 0;
-  border-bottom: 1px solid color-mix(in oklab, var(--atelier-ink) 22%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--atelier-ink) 30%, transparent);
   background: transparent;
   padding: 0.65rem 0;
   color: var(--atelier-ink);
