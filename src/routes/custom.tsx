@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, ImagePlus, MessageCircle, Phone, Trash2 } from "lucide-react";
 
 import customBigBoss from "@/assets/shop/custom-bigboss.jpg";
+import customBrief from "@/assets/shop/custom-brief.jpg";
 import customCabinet from "@/assets/shop/custom-cabinet.jpg";
 import customFarhan from "@/assets/shop/custom-farhan.jpg";
 import customQueen from "@/assets/shop/custom-queen.jpg";
@@ -281,6 +282,28 @@ function CustomCakePage() {
                 >
                   <MessageCircle className="size-4" /> Message us on WhatsApp
                 </a>
+              </Reveal>
+
+              {/* Fills the column beside the form on wide screens. Hidden below
+                  lg, where the column stacks above the form and an image here
+                  would only push the fields further down. */}
+              <Reveal
+                variant="zoom"
+                delay={340}
+                className="atelier-photo-frame atelier-depth mt-12 hidden lg:block"
+              >
+                <img
+                  src={customBrief}
+                  alt="Chocolate cake finished with a Ferrero and wafer shards, carrying the Amourea crest"
+                  width={880}
+                  height={1100}
+                  loading="lazy"
+                  className="h-[26rem] w-full object-cover xl:h-[32rem]"
+                />
+                <span className="atelier-photo-note">
+                  Made to
+                  <br />a brief
+                </span>
               </Reveal>
             </div>
 
